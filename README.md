@@ -8,4 +8,6 @@ If a sound above a certain threshold is detected, the system responds by trigger
 Pressing any button on the remote again turns off the system. The blue LED turns off, indicating that the sound sensor is no longer active and the system has been disabled.
 
 
-![img1]()
+![img1](arduino_project_alarm_IR_voice_sensor_PART1.jpg)
+![img1](arduino_project_alarm_IR_voice_sensor_PART2.jpg)
+![img1](arduino_project_alarm_IR_voice_sensor_PART3.jpg)
