@@ -11,3 +11,80 @@ Pressing any button on the remote again turns off the system. The blue LED turns
 ![img1](arduino_project_alarm_IR_voice_sensor_PART1.jpg)
 ![img1](arduino_project_alarm_IR_voice_sensor_PART2.jpg)
 ![img1](arduino_project_alarm_IR_voice_sensor_PART3.jpg)
+
+
+# Code below:
+'''cpp
+#include <IRremote.hpp>
+
+IRrecv ir(2);
+
+
+byte redLED = 9;
+byte blueLED = 10;
+byte buzzer = 4;
+int voiceValue;
+int voice = A5;
+
+
+bool alertState = false;
+
+
+void alert(){
+  byte count = 0;
+
+  do{
+    digitalWrite(redLED, HIGH);
+    digitalWrite(buzzer, HIGH);
+    delay(300);
+    digitalWrite(redLED, LOW);
+    digitalWrite(buzzer, LOW);
+    delay(300);
+    count++;
+  }
+
+  while (count < 3);
+}
+
+
+void setup() {
+  Serial.begin(9600);
+  ir.enableIRIn();
+  pinMode(redLED, OUTPUT);
+  pinMode(blueLED, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+}
+
+void loop() {
+  if (ir.decode()) {
+    alertState = !alertState;
+    delay(100);
+  }
+
+  if (alertState){
+    digitalWrite(blueLED, HIGH);
+
+    voiceValue = analogRead(voice);
+
+    if (voiceValue > 520){
+      alert();
+    }
+
+  }
+
+  else{
+    digitalWrite(blueLED, LOW);
+  }
+
+  
+
+  ir.resume();
+
+  Serial.println(voiceValue);
+  // Serial.println(ir.decodedIRData.command);
+
+  delay(300);
+
+}
+
+'''
