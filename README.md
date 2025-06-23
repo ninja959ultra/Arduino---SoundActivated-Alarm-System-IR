@@ -14,10 +14,12 @@ Pressing any button on the remote again turns off the system. The blue LED turns
 
 
 # Code below:
+
 ```cpp
 #include <IRremote.hpp>
 
 IRrecv ir(2);
+
 
 byte redLED = 9;
 byte blueLED = 10;
@@ -25,12 +27,14 @@ byte buzzer = 4;
 int voiceValue;
 int voice = A5;
 
+
 bool alertState = false;
 
-void alert() {
+
+void alert(){
   byte count = 0;
 
-  do {
+  do{
     digitalWrite(redLED, HIGH);
     digitalWrite(buzzer, HIGH);
     delay(300);
@@ -38,8 +42,11 @@ void alert() {
     digitalWrite(buzzer, LOW);
     delay(300);
     count++;
-  } while (count < 3);
+  }
+
+  while (count < 3);
 }
+
 
 void setup() {
   Serial.begin(9600);
@@ -55,17 +62,22 @@ void loop() {
     delay(100);
   }
 
-  if (alertState) {
+  if (alertState){
     digitalWrite(blueLED, HIGH);
 
     voiceValue = analogRead(voice);
 
-    if (voiceValue > 520) {
+    if (voiceValue > 520){
       alert();
     }
-  } else {
+
+  }
+
+  else{
     digitalWrite(blueLED, LOW);
   }
+
+  
 
   ir.resume();
 
@@ -73,6 +85,7 @@ void loop() {
   // Serial.println(ir.decodedIRData.command);
 
   delay(300);
+
 }
 
 
