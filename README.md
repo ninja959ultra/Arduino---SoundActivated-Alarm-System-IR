@@ -82,7 +82,6 @@ void loop() {
   ir.resume();
 
   Serial.println(voiceValue);
-  // Serial.println(ir.decodedIRData.command);
 
   delay(300);
 
